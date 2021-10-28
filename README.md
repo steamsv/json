@@ -1,84 +1,165 @@
-# JSONEditor功能组件
+Ace (Ajax.org Cloud9 Editor)
+============================
 
-> JSON数据可视化/JSONEditor，json可视化编辑能力的实现（以表单形式编辑json数据）
+[![Build Status](https://github.com/ajaxorg/ace/workflows/CI/badge.svg)](https://github.com/ajaxorg/ace/actions) 
+[![npm](https://img.shields.io/npm/v/ace-builds.svg)](https://www.npmjs.com/package/ace-builds)
 
-使用场景：提供可视化界面编辑json数据内容
+_Note_: The new site at http://ace.c9.io contains all the info below along with an embedding guide and all the other resources you need to get started with Ace.
 
-技术栈：React/Mobx/Ant Design
+Ace is a standalone code editor written in JavaScript. Our goal is to create a browser based editor that matches and extends the features, usability and performance of existing native editors such as TextMate, Vim or Eclipse. It can be easily embedded in any web page or JavaScript application. Ace is developed as the primary editor for [Cloud9 IDE](https://c9.io/) and the successor of the Mozilla Skywriter (Bespin) Project.
 
-特点：
-1. 弹性布局，提供大屏和小屏两种展示模式
-2. 支持字段联动
-3. 支持12种基础类型组件（input、boolean、 date、date-time、 time、 url、
- textarea、number、color、radio、 select、single-select）
-4. 支持11个特殊类型组件（object、array、json、datasource、dynamic-data、event、
-codearea、htmlarea、text-editor([使用说明](https://github.com/wibetter/json-editor/blob/master/docs/TextEditor.md))、quantity、box-style）
-5. 支持json转schema能力，当schemaData为空而jsonData不为空时，自动通过json转换一个对应的schemaData
+Features
+--------
 
-在线Demo：
-[点击访问在线Demo](https://wibetter.github.io/json-editor/demo1/index.html)
+* Syntax highlighting for over 120 languages (TextMate/Sublime/_.tmlanguage_ files can be imported)
+* Over 20 themes (TextMate/Sublime/_.tmtheme_ files can be imported)
+* Automatic indent and outdent
+* An optional command line
+* Handles huge documents (at last check, 4,000,000 lines is the upper limit)
+* Fully customizable key bindings including vim and Emacs modes
+* Search and replace with regular expressions
+* Highlight matching parentheses
+* Toggle between soft tabs and real tabs
+* Displays hidden characters
+* Drag and drop text using the mouse
+* Line wrapping
+* Code folding
+* Multiple cursors and selections
+* Live syntax checker (currently JavaScript/CoffeeScript/CSS/XQuery)
+* Cut, copy, and paste functionality
 
-JSONEditor效果图：
-![image](https://user-images.githubusercontent.com/11958920/104156633-7eedc680-5424-11eb-9972-2e8613bd5460.png)
+Take Ace for a spin!
+--------------------
 
-***
+Check out the Ace live [demo](http://ace.c9.io/build/kitchen-sink.html) or get a [Cloud9 IDE account](https://c9.io/) to experience Ace while editing one of your own GitHub projects.
 
-## 安装
+If you want, you can use Ace as a textarea replacement thanks to the [Ace Bookmarklet](http://ajaxorg.github.io/ace/build/demo/bookmarklet/index.html).
 
-```bash
-npm install --save @wibetter/json-editor
+Embedding Ace
+-------------
+
+Ace can be easily embedded into any existing web page. You can either use one of pre-packaged versions of [ace](https://github.com/ajaxorg/ace-builds/) (just copy one of `src*` subdirectories somewhere into your project), or use requireJS to load contents of [lib/ace](https://github.com/ajaxorg/ace/tree/master/lib/ace) as `ace`
+
+
+The easiest version is simply:
+
+```html
+<div id="editor">some text</div>
+<script src="src/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var editor = ace.edit("editor");
+</script>
 ```
 
+With "editor" being the id of the DOM element, which should be converted to an editor. Note that this element must be explicitly sized and positioned `absolute` or `relative` for Ace to work. e.g.
 
-## 使用示例
-
-```js
-import * as React from 'react';
-import JSONEditor from '@wibetter/json-editor';
-import '@wibetter/json-editor/dist/index.css';
-
-class IndexDemo extends React.PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      jsonSchema: {},
-      jsonData: {},
-      wideScreen: false,
-    };
-  }
-
-  render() {
-    const { jsonSchema, jsonData, wideScreen } = this.state;
-    return (
-      <>
-        <div className="json-action-container">
-          <div className="json-editor-box">
-            <JSONEditor
-              wideScreen={wideScreen} // 宽屏和小屏的配置项
-              schemaData={jsonSchema}
-              jsonData={jsonData}
-              onChange={(newJsonData) => {
-                this.setState({
-                  jsonData: newJsonData
-                });
-              }}
-            />
-          </div>
-        </div>
-      </>
-    );
-  }
+```css
+#editor {
+    position: absolute;
+    width: 500px;
+    height: 400px;
 }
 ```
 
-## JSONEditor 可配置参数
+To change the theme simply include the Theme's JavaScript file
 
-| name         | type     | default | desc                            |
-| ------------ | -------- | ------- | ------------------------------- |
-| `viewStyle`  | string   | fold    | 非必填，默认为fold（可折叠面板），可选：tabs:（tabs切换面板）|
-| `jsonView`   | boolean  | false   | 非必填，是否开启全局源码模式，默认不开启      |
-| `wideScreen` | boolean  | false   | 非必填，宽屏模式/小屏模式, 默认是小屏模式     |
-| `schemaData` | object   | {}      | 非必填，json的结构数据，备注：schemaData为空而jsonData不为空时，会自动通过jsonData生产一份应的schemaData                    |
-| `jsonData`   | object   | {}      | 必填项，json的内容数据                    |
-| `onChange`   | function | () => {}    | jsonData内容变动时会触发onChange   |
+```html
+<script src="src/theme-twilight.js" type="text/javascript" charset="utf-8"></script>
+```
+
+and configure the editor to use the theme:
+
+```javascript
+editor.setTheme("ace/theme/twilight");
+```
+
+By default the editor only supports plain text mode; many other languages are available as separate modules. After including the mode's JavaScript file:
+
+```html
+<script src="src/mode-javascript.js" type="text/javascript" charset="utf-8"></script>
+```
+
+The mode can then be used like this:
+
+```javascript
+var JavaScriptMode = ace.require("ace/mode/javascript").Mode;
+editor.session.setMode(new JavaScriptMode());
+```
+
+to destroy editor use
+
+```javascript
+editor.destroy();
+editor.container.remove();
+```
+
+
+Documentation
+-------------
+
+Additional usage information, including events to listen to and extending syntax highlighters, can be found [on the main Ace website](http://ace.c9.io).
+
+You can also find API documentation at [http://ace.c9.io/#nav=api](http://ace.c9.io/#nav=api).
+
+Also check out the sample code for the kitchen sink [demo app](https://github.com/ajaxorg/ace/blob/master/demo/kitchen-sink/demo.js).
+
+If you still need help, feel free to drop a mail on the [ace mailing list](http://groups.google.com/group/ace-discuss), or at `irc.freenode.net#ace`.
+
+Running Ace
+-----------
+
+After the checkout Ace works out of the box. No build step is required. To try it out, simply start the bundled mini HTTP server using Node.JS
+
+```bash
+node ./static.js
+```
+
+The editor can then be opened at http://localhost:8888/kitchen-sink.html. 
+
+To open the editor with a file:/// URL see [the wiki](https://github.com/ajaxorg/ace/wiki/Running-Ace-from-file).
+
+Building Ace
+-----------
+
+You do not generally need to build ACE. The [ace-builds repository](https://github.com/ajaxorg/ace-builds/) endeavours to maintain the latest build, and you can just copy one of _src*_ subdirectories somewhere into your project.
+
+However, all you need is Node.js and npm installed to package ACE. Just run `npm install` in the ace folder to install dependencies:
+
+```bash
+npm install
+node ./Makefile.dryice.js
+```
+
+To package Ace, we use the dryice build tool developed by the Mozilla Skywriter team. Call `node Makefile.dryice.js` on the command-line to start the packing. This build script accepts the following options
+
+```bash
+-m                 minify build files with uglify-js          
+-nc                namespace require and define calls with "ace"
+-bm                builds the bookmarklet version
+--target ./path    specify relative path for output folder (default value is "./build")
+```
+
+To generate all the files in the ace-builds repository, run `node Makefile.dryice.js full --target ../ace-builds`
+
+Running the Unit Tests
+----------------------
+
+The Ace unit tests can run on node.js. Assuming you have already done `npm install`, just call:
+
+```bash
+npm run test
+```
+
+You can also run the tests in your browser by serving:
+
+    http://localhost:8888/lib/ace/test/tests.html
+
+This makes debugging failing tests way more easier.
+
+Contributing
+-----------------------------
+
+Ace is a community project and wouldn't be what it is without contributions! We actively encourage and support contributions. The Ace source code is released under the BSD License. This license is very simple, and is friendly to all kinds of projects, whether open source or not. Take charge of your editor and add your favorite language highlighting and keybindings!
+
+Feel free to fork and improve/enhance Ace any way you want. If you feel that the editor or the Ace community will benefit from your changes, please open a pull request. For more information on our contributing guidelines, see [CONTRIBUTING.md](https://github.com/ajaxorg/ace/blob/master/CONTRIBUTING.md).
+

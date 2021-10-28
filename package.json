@@ -1,78 +1,40 @@
 {
-  "name": "@wibetter/json-editor",
-  "version": "3.5.6",
-  "description": "JSON数据可视化/JSONEditor, 可视化界面编辑json数据内容",
-  "keywords": [
-    "json",
-    "json数据可视化",
-    "表单可视化"
-  ],
-  "author": "ldan@wibetter",
-  "license": "MIT",
-  "main": "dist/index.umd.js",
-  "scripts": {
-    "dev": "akfun dev",
-    "build2lib": "akfun build2lib",
-    "build2demo": "akfun build",
-    "format": "prettier --write \"src/**/**/*.{js,jsx,ts,tsx,vue,scss,json}\""
-  },
-  "files": [
-    "dist/*",
-    "public/*"
-  ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    "name": "ace",
+    "description": "Ajax.org Code Editor is a full featured source code highlighting editor that powers the Cloud9 IDE",
+    "version": "1.4.13",
+    "homepage": "http://github.com/ajaxorg/ace",
+    "engines": {
+        "node": ">= 0.6.0"
+    },
+    "author": "Fabian Jakobs <fabian@c9.io>",
+    "main": "lib/ace",
+    "typings": "ace.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "http://github.com/ajaxorg/ace.git"
+    },
+    "devDependencies": {
+        "asyncjs": "~0.0.12",
+        "amd-loader": "~0.0.4",
+        "dryice": "0.4.11",
+        "architect-build": "https://github.com/c9/architect-build/tarball/43a6fdeffe"
+    },
+    "mappings": {
+        "ace": "."
+    },
+    "licenses": [
+        {
+            "type": "BSD New",
+            "url": "http://opensource.org/licenses/BSD-3-Clause"
+        }
+    ],
+    "directories": {
+        "lib": "lib/ace"
+    },
+    "scripts": {
+        "start": "node static.js",
+        "test": "node lib/ace/test/all.js",
+        "lint": "eslint \"lib/ace/**/*.js\"",
+        "fix": "eslint --fix 'lib/ace/**/*.js'"
     }
-  },
-  "lint-staged": {
-    "src/**/**/*.{js,jsx,ts,tsx,vue,scss,json}": [
-      "prettier --write"
-    ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+http://git@github.com:wibetter/json-editor.git"
-  },
-  "bugs": {
-    "url": "https://github.com/wibetter/json-editor/issues"
-  },
-  "dependencies": {
-    "@ant-design/icons": "^4.2.1",
-    "@wibetter/json-schema-editor": "^3.5.12",
-    "@wibetter/json-utils": "^1.2.31",
-    "ace-builds": "^1.4.12",
-    "antd": "^4.3.4",
-    "braft-editor": "^2.3.9",
-    "braft-extensions": "^0.1.1",
-    "mobx": "^5.15.4",
-    "mobx-react": "^6.2.2",
-    "moment": "^2.27.0",
-    "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-ace": "^9.1.1",
-    "react-color": "^2.19.3",
-    "react-dom": "^16.8.6"
-  },
-  "devDependencies": {
-    "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^9.1.1",
-    "akfun": "^1.5.12",
-    "husky": "^4.2.5",
-    "lint-staged": "^10.2.9",
-    "prettier": "^2.0.5"
-  },
-  "engines": {
-    "node": ">= 10.13.0",
-    "npm": ">= 6.4.1"
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8",
-    "iOS >= 8",
-    "Firefox >= 20",
-    "Android > 4.4"
-  ]
 }
