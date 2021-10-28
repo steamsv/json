@@ -1,46 +1,45 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Custom styling | JSONEditor</title>
+    <meta charset="utf-8">
 
-  <script src="../dist/jsoneditor.js"></script>
+    <title>JSONEditor | Custom styling</title>
 
-  <style type="text/css">
-    #jsoneditor {
-      width: 500px;
-      height: 500px;
-    }
+    <link href="../dist/jsoneditor.css" rel="stylesheet" type="text/css">
+    <script src="../dist/jsoneditor.js"></script>
 
-    p {
-      width: 500px;
-      font-family: "DejaVu Sans", sans-serif;
-    }
-  </style>
+    <style type="text/css">
+        #jsoneditor {
+            width: 500px;
+            height: 500px;
+        }
 
-  <link href="./css/darktheme.css" rel="stylesheet" type="text/css">
+        p {
+            width: 500px;
+            font-family: "DejaVu Sans", sans-serif;
+        }
+    </style>
+
+    <link href="./css/darktheme.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
-
-<h1>Custom styling</h1>
 <p>
-  This example demonstrates how to customize the look of JSONEditor,
-  the editor below has a dark theme. Note that the example isn't worked
-  out for the mode <code>code</code>. To do that, you can load and configure
-  a custom theme for the Ace editor.
+    This example demonstrates how to customize the look of JSONEditor,
+    the editor below has a dark theme. Note that the example isn't worked
+    out for the mode <code>code</code>. To do that, you can load and configure
+    a custom theme for the Ace editor.
 </p>
 
 <div id="jsoneditor"></div>
 
 <script>
   // create the editor
-  var editor = jsoneditor(document.getElementById('jsoneditor'), {
-    modes: ['text', 'tree']
-  })
-
-  // load json
-  var json = {
+  const container = document.getElementById('jsoneditor')
+  const options = {
+    modes: ['tree', 'text']
+  }
+  const json = {
     'array': [1, 2, 3],
     'boolean': true,
     'null': null,
@@ -48,7 +47,7 @@
     'object': {'a': 'b', 'c': 'd'},
     'string': 'Hello World'
   }
-  editor.set(json)
+  const editor = new JSONEditor(container, options, json)
 </script>
 </body>
 </html>

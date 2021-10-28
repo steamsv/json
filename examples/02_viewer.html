@@ -1,9 +1,11 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Viewer | JSONEditor</title>
+  <meta charset="utf-8">
 
+  <title>JSONEditor | Viewer</title>
+
+  <link href="../dist/jsoneditor.css" rel="stylesheet" type="text/css">
   <script src="../dist/jsoneditor.js"></script>
 
 
@@ -18,20 +20,18 @@
 </head>
 <body>
 <p>
-  This editor is read-only (mode='view').
+  This editor is read-only (mode='viewer').
 </p>
 <div id="jsoneditor"></div>
 
 <script>
-  var container = document.getElementById('jsoneditor')
+  const container = document.getElementById('jsoneditor')
 
-  var options = {
+  const options = {
     mode: 'view'
   }
 
-  var editor = jsoneditor(container, options)
-
-  var json = {
+  const json = {
     'array': [1, 2, 3],
     'boolean': true,
     'null': null,
@@ -39,8 +39,8 @@
     'object': {'a': 'b', 'c': 'd'},
     'string': 'Hello World'
   }
-  editor.set(json)
 
+  const editor = new JSONEditor(container, options, json)
 </script>
 </body>
 </html>

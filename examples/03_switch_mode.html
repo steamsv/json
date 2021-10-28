@@ -1,11 +1,12 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 <head>
-  <title>Switch mode | JSONEditor</title>
-
   <!-- when using the mode "code", it's important to specify charset utf-8 -->
-  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <meta charset="utf-8">
 
+  <title>JSONEditor | Switch mode</title>
+
+  <link href="../dist/jsoneditor.css" rel="stylesheet" type="text/css">
   <script src="../dist/jsoneditor.js"></script>
 
   <style type="text/css">
@@ -28,7 +29,6 @@
 </head>
 <body>
 
-<h1>Switch mode</h1>
 <p>
   Switch editor mode using the mode box.
   Note that the mode can be changed programmatically as well using the method
@@ -38,22 +38,17 @@
 <div id="jsoneditor"></div>
 
 <script>
-  var container = document.getElementById('jsoneditor')
+  const container = document.getElementById('jsoneditor')
 
-  var options = {
+  const options = {
     mode: 'tree',
-    modes: ['text', 'code', 'tree', 'form', 'view'], // allowed modes
-    onError: function (err) {
-      alert(err.toString())
-    },
-    onChangeMode: function (mode, prevMode) {
-      console.log('Mode switched from', prevMode, 'to', mode)
+    modes: ['code', 'form', 'text', 'tree', 'view', 'preview'], // allowed modes
+    onModeChange: function (newMode, oldMode) {
+      console.log('Mode switched from', oldMode, 'to', newMode)
     }
   }
 
-  var editor = jsoneditor(container, options)
-
-  var json = {
+  const json = {
     "array": [1, 2, 3],
     "boolean": true,
     "null": null,
@@ -62,7 +57,7 @@
     "string": "Hello World"
   }
 
-  editor.set(json)
+  const editor = new JSONEditor(container, options, json)
 </script>
 </body>
 </html>

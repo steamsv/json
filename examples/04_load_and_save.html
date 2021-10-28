@@ -1,9 +1,11 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Load and save | JSONEditor</title>
+  <meta charset="utf-8">
 
+  <title>JSONEditor | Load and save</title>
+
+  <link href="../dist/jsoneditor.css" rel="stylesheet" type="text/css">
   <script src="../dist/jsoneditor.js"></script>
 
   <script src="https://bgrins.github.io/filereader.js/filereader.js"></script>
@@ -38,7 +40,7 @@
 
 <script>
   // create the editor
-  var editor = jsoneditor(document.getElementById('jsoneditor'))
+  const editor = new JSONEditor(document.getElementById('jsoneditor'))
 
   // Load a JSON document
   FileReaderJS.setupInput(document.getElementById('loadDocument'), {
@@ -53,19 +55,19 @@
   // Save a JSON document
   document.getElementById('saveDocument').onclick = function () {
     // Save Dialog
-    fname = window.prompt('Save as...')
-    
+    let fname = window.prompt("Save as...")
+
     // Check json extension in file name
-    if (fname.indexOf('.') == -1) {
-      fname = fname + '.json'
+    if (fname.indexOf(".") === -1) {
+      fname = fname + ".json"
     } else {
-      if (fname.split('.').pop().toLowerCase() == 'json'){
+      if (fname.split('.').pop().toLowerCase() === "json") {
         // Nothing to do
       } else {
-        fname = fname.split('.')[0] + '.json'
+        fname = fname.split('.')[0] + ".json"
       }
-    } 
-    var blob = new Blob([editor.getText()], {type: 'application/json;charset=utf-8'})
+    }
+    const blob = new Blob([editor.getText()], {type: 'application/json;charset=utf-8'})
     saveAs(blob, fname)
   }
 </script>
