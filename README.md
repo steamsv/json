@@ -1,27 +1,35 @@
-# JSON Editor with Electron
+# Json Editor / Json Viewer :-
+Json online editor is a web-based tool, designed to create, edit, view, format, and save json online. This tool has multiple features which will help you to create them easily. Code from master branch is hosted [here](http://codedestine.com/json-editor.html). A list of all its features and functionality are as follows :-
 
-Create, open, edit, and save local JSON files in a GUI.
+**Drag & Drop**
+You can create a them from scratch by using drag and drop feature. To use drag & drop feature, drag a node and drop it on any node, dragged one will be added to the drop one, if it passes the below mentioned rules :-
 
-This uses the [JSON Editor](https://github.com/josdejong/jsoneditor) in an [Electron](http://electron.atom.io/) application.  It provides 3 buttons for file interactions - New, Open, and Save.
+ 1. Elements can only come inside an object. 
+ 2. Array can only come inside an object.
+ 3. Object can come inside an object or an array.
 
-![screenshot of running application](images/RunningApplication.png)
+Once the drag node is added to the drop one, json online editor / json viewer tool will open a popup based on the dragged node type, element popup for element type, array popup for array type and so on, fill all the mandatory fields in the popup and click Set button to finish.
 
-## Prerequisites
+**Tree View**
+This view will show your work in a tree structure, you can also expand this, by clicking expand image button on the right hand side of tree view bar.
 
-* Git
-* Node.js
+**Text View**
+This view is like a code editor, it will show your work in the text format, you can also expand this, by clicking expand image button on the right hand side of the text bar.
 
-## Setup
+**Download**
+You can download your existing work, which you have created using json online editor / json viewer tool. To use this functionality,  click download button on the top bar, this will download a file onto your disk.
 
-1. Clone the repository.
-2. Open Git Bash and enter `npm install`.
+**Load**
+You can load any of your work into the tool by using load feature. To use this, first copy and paste your existing work  into the text view and click load image button on the text bar.
 
-## Running the Application
+**New**
+This functionality will enable you to remove your existing work from the json online editor / json viewer tool, So that you can start from the scratch.
 
-In Git Bash, enter `npm start`.
+**Copy & Paste**
+You can copy and paste any node into another based on three rules mentioned above in Drag & Drop section. To use Copy & Paste functionality, first select a node which you like to copy, then click the copy and paste icon on tree bar and finally select the node inside which you like to copy your previous selection. This will copy your previously selected one inside new one. This Copy & Paste functionality is very useful, when you want add a new property, which is similar to one of the existing property.
 
-## Branches
+**Delete**
+You can delete any node from json online editor / json viewer. To use this delete functionality, first select the node which you like to delete, then click the delete icon on the right side of the bar, once you click the delete icon an confirm dialog will be displayed, asking your confirmation for delete. Confirm dialog will contain two buttons Ok and Cancel, click OK to delete or click Cancel to leave it.
 
-The master branch contains a generic JSON editor for any *.json file.
-
-The ig-tablewire branch is specific to certain files that Infragistics uses internally for help documentation.  If you want to use this branch, simply open Git Bash and enter `git checkout ig-tablewire` before running `npm start`.
+**Save Online**
+You can save and share your work by using this functionality. To use this functionality, click the save online button on the top bar. This will save your work on the server and will give you a url with unique id, url can be used to view and edit your saved work and to share your work with your colleagues.
