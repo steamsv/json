@@ -1,165 +1,188 @@
-Ace (Ajax.org Cloud9 Editor)
-============================
+# 转杰森 | ZJSON
+> 全力打造最好用的json格式化工具，欢迎一起来玩！
 
-[![Build Status](https://github.com/ajaxorg/ace/workflows/CI/badge.svg)](https://github.com/ajaxorg/ace/actions) 
-[![npm](https://img.shields.io/npm/v/ace-builds.svg)](https://www.npmjs.com/package/ace-builds)
+### 一、访问地址
+- WebSite: https://www.zjson.net
+- FuncLib: https://www.funclib.net
+- GitHub: &nbsp;https://github.com/CN-Tower/zjson
+- GitHub: &nbsp;https://github.com/CN-Tower/funclib
+- Algorithm: https://github.com/CN-Tower/format-to-json
 
-_Note_: The new site at http://ace.c9.io contains all the info below along with an embedding guide and all the other resources you need to get started with Ace.
+#### 主页界面
+![](/images/zjson.png)
+#### 对比界面
+![](/images/zjson-diff.png)
 
-Ace is a standalone code editor written in JavaScript. Our goal is to create a browser based editor that matches and extends the features, usability and performance of existing native editors such as TextMate, Vim or Eclipse. It can be easily embedded in any web page or JavaScript application. Ace is developed as the primary editor for [Cloud9 IDE](https://c9.io/) and the successor of the Mozilla Skywriter (Bespin) Project.
+### 二、简单介绍
 
-Features
---------
+转杰森是使用MEAN-STACK ( MongoDB + Express + Angular + NodeJS技术栈 ) 开发的一个JSON格式化和编辑工具，功能丰富强大、界面简洁美观，还有很多高级特性：
 
-* Syntax highlighting for over 120 languages (TextMate/Sublime/_.tmlanguage_ files can be imported)
-* Over 20 themes (TextMate/Sublime/_.tmtheme_ files can be imported)
-* Automatic indent and outdent
-* An optional command line
-* Handles huge documents (at last check, 4,000,000 lines is the upper limit)
-* Fully customizable key bindings including vim and Emacs modes
-* Search and replace with regular expressions
-* Highlight matching parentheses
-* Toggle between soft tabs and real tabs
-* Displays hidden characters
-* Drag and drop text using the mouse
-* Line wrapping
-* Code folding
-* Multiple cursors and selections
-* Live syntax checker (currently JavaScript/CoffeeScript/CSS/XQuery)
-* Cut, copy, and paste functionality
+- [x] 支持错误的json解析及错误行号和错误类型提示；
+- [x] 支持python unicode集合的解析；
+- [x] 支持保存、删除和呈现格式化的历史；
+- [x] 支持格式化后的json以文件的形式下载；
+- [x] 支持中英文双语国际化；
+- [x] 支持线上json分享；
+- [x] 支持多种皮肤切换；
+- [x] 支持JSON转义、压缩；
+- [x] 支持JSON标准化析，把非标准JSON（如：js的object）转化为标准JSON格式；
+- [x] 支持JSON对比（有与原码对比、与历史比对和与新建代码对比三种模式）；
+- [x] 还有更多的功能、配置、特性等你去发现！
 
-Take Ace for a spin!
---------------------
+相比其它在线格式化工具，如：bejson.com和json.cn等，转杰森界面更加专业、功能更加实用，绝对是开发和测试的好工具。
 
-Check out the Ace live [demo](http://ace.c9.io/build/kitchen-sink.html) or get a [Cloud9 IDE account](https://c9.io/) to experience Ace while editing one of your own GitHub projects.
+![](/images/mean-stack.jpg)
 
-If you want, you can use Ace as a textarea replacement thanks to the [Ace Bookmarklet](http://ajaxorg.github.io/ace/build/demo/bookmarklet/index.html).
+### 三、运行项目
 
-Embedding Ace
--------------
-
-Ace can be easily embedded into any existing web page. You can either use one of pre-packaged versions of [ace](https://github.com/ajaxorg/ace-builds/) (just copy one of `src*` subdirectories somewhere into your project), or use requireJS to load contents of [lib/ace](https://github.com/ajaxorg/ace/tree/master/lib/ace) as `ace`
-
-
-The easiest version is simply:
-
-```html
-<div id="editor">some text</div>
-<script src="src/ace.js" type="text/javascript" charset="utf-8"></script>
-<script>
-    var editor = ace.edit("editor");
-</script>
-```
-
-With "editor" being the id of the DOM element, which should be converted to an editor. Note that this element must be explicitly sized and positioned `absolute` or `relative` for Ace to work. e.g.
-
-```css
-#editor {
-    position: absolute;
-    width: 500px;
-    height: 400px;
-}
-```
-
-To change the theme simply include the Theme's JavaScript file
-
-```html
-<script src="src/theme-twilight.js" type="text/javascript" charset="utf-8"></script>
-```
-
-and configure the editor to use the theme:
-
-```javascript
-editor.setTheme("ace/theme/twilight");
-```
-
-By default the editor only supports plain text mode; many other languages are available as separate modules. After including the mode's JavaScript file:
-
-```html
-<script src="src/mode-javascript.js" type="text/javascript" charset="utf-8"></script>
-```
-
-The mode can then be used like this:
-
-```javascript
-var JavaScriptMode = ace.require("ace/mode/javascript").Mode;
-editor.session.setMode(new JavaScriptMode());
-```
-
-to destroy editor use
-
-```javascript
-editor.destroy();
-editor.container.remove();
-```
-
-
-Documentation
--------------
-
-Additional usage information, including events to listen to and extending syntax highlighters, can be found [on the main Ace website](http://ace.c9.io).
-
-You can also find API documentation at [http://ace.c9.io/#nav=api](http://ace.c9.io/#nav=api).
-
-Also check out the sample code for the kitchen sink [demo app](https://github.com/ajaxorg/ace/blob/master/demo/kitchen-sink/demo.js).
-
-If you still need help, feel free to drop a mail on the [ace mailing list](http://groups.google.com/group/ace-discuss), or at `irc.freenode.net#ace`.
-
-Running Ace
------------
-
-After the checkout Ace works out of the box. No build step is required. To try it out, simply start the bundled mini HTTP server using Node.JS
-
+#### 开发启动
 ```bash
-node ./static.js
+npm start
 ```
 
-The editor can then be opened at http://localhost:8888/kitchen-sink.html. 
-
-To open the editor with a file:/// URL see [the wiki](https://github.com/ajaxorg/ace/wiki/Running-Ace-from-file).
-
-Building Ace
------------
-
-You do not generally need to build ACE. The [ace-builds repository](https://github.com/ajaxorg/ace-builds/) endeavours to maintain the latest build, and you can just copy one of _src*_ subdirectories somewhere into your project.
-
-However, all you need is Node.js and npm installed to package ACE. Just run `npm install` in the ace folder to install dependencies:
-
+#### 项目打包
 ```bash
-npm install
-node ./Makefile.dryice.js
+npm run build
 ```
 
-To package Ace, we use the dryice build tool developed by the Mozilla Skywriter team. Call `node Makefile.dryice.js` on the command-line to start the packing. This build script accepts the following options
-
+#### 应用程序
+Windows
 ```bash
--m                 minify build files with uglify-js          
--nc                namespace require and define calls with "ace"
--bm                builds the bookmarklet version
---target ./path    specify relative path for output folder (default value is "./build")
+npm run build:exe
 ```
-
-To generate all the files in the ace-builds repository, run `node Makefile.dryice.js full --target ../ace-builds`
-
-Running the Unit Tests
-----------------------
-
-The Ace unit tests can run on node.js. Assuming you have already done `npm install`, just call:
-
+MacOS
 ```bash
-npm run test
+npm run build:dmg
 ```
 
-You can also run the tests in your browser by serving:
-
-    http://localhost:8888/lib/ace/test/tests.html
-
-This makes debugging failing tests way more easier.
-
-Contributing
------------------------------
-
-Ace is a community project and wouldn't be what it is without contributions! We actively encourage and support contributions. The Ace source code is released under the BSD License. This license is very simple, and is friendly to all kinds of projects, whether open source or not. Take charge of your editor and add your favorite language highlighting and keybindings!
-
-Feel free to fork and improve/enhance Ace any way you want. If you feel that the editor or the Ace community will benefit from your changes, please open a pull request. For more information on our contributing guidelines, see [CONTRIBUTING.md](https://github.com/ajaxorg/ace/blob/master/CONTRIBUTING.md).
-
+### 四、项目结构
+```
+zjson ( Directories: 82, Files: 181 )
+ ├─ e2e                                  # 端到端测试文件
+ │ ├─ src
+ │ │ ├─ app.e2e-spec.ts
+ │ │ └─ app.po.ts
+ │ └─ tsconfig.e2e.json
+ ├─ electron-app                         # Electron配置文件
+ │ ├─ index.html
+ │ ├─ main.js
+ │ ├─ package.json
+ │ ├─ renderer.js
+ │ ├─ zjson.icns
+ │ └─ zjson.ico
+ ├─ scripts                              # 脚本目录
+ │ ├─ build.js
+ │ ├─ build-exe.js
+ │ ├─ build-msi.js
+ │ ├─ clear.js
+ │ ├─ electron.conf.js
+ │ ├─ prepare.js
+ │ └─ rename.js
+ ├─ src                                  # 项目主目录
+ │ ├─ app
+ │ │ ├─ @shared
+ │ │ │ ├─ index.ts
+ │ │ │ ├─ message.service.ts
+ │ │ │ ├─ interfaces.ts
+ │ │ │ ├─ styles.less
+ │ │ │ └─ theme.less
+ │ │ ├─ app-config
+ │ │ │ ├─ config-items
+ │ │ │ │ ├─ config-indent.component.ts
+ │ │ │ │ ├─ config-lang.component.ts
+ │ │ │ │ ├─ config-quote.component.ts
+ │ │ │ │ └─ config-theme.component.ts
+ │ │ │ ├─ app-config.component.html
+ │ │ │ ├─ app-config.component.less
+ │ │ │ ├─ app-config.component.ts
+ │ │ │ └─ index.ts
+ │ │ ├─ attachments
+ │ │ │ ├─ index.ts
+ │ │ │ ├─ zjs-attachments.less
+ │ │ │ ├─ zjs-compare.component.ts
+ │ │ │ ├─ zjs-hint.component.ts
+ │ │ │ ├─ zjs-hist.component.ts
+ │ │ │ ├─ zjs-info.component.ts
+ │ │ │ ├─ zjs-loading.component.ts
+ │ │ │ ├─ zjs-notice.component.ts
+ │ │ │ ├─ zjs-title.component.ts
+ │ │ │ └─ zjs-update.component.ts
+ │ │ ├─ formatter
+ │ │ │ ├─ formatter.conf.ts
+ │ │ │ ├─ formatter.core.ts
+ │ │ │ └─ formatter.help.ts
+ │ │ ├─ monaco-editor
+ │ │ │ ├─ index.ts
+ │ │ │ ├─ monaco-diff-editor.component.ts
+ │ │ │ ├─ monaco-editor.base.ts
+ │ │ │ ├─ monaco-editor.component.ts
+ │ │ │ ├─ monaco-editor.themes.ts
+ │ │ │ ├─ monaco-eidtor.service.ts
+ │ │ │ ├─ zjs-diff-editor.component.html
+ │ │ │ ├─ zjs-diff-editor.component.less
+ │ │ │ └─ zjs-diff-editor.component.ts
+ │ │ ├─ zjson-panel
+ │ │ │ ├─ zjson-panel.component.css
+ │ │ │ ├─ zjson-panel.component.html
+ │ │ │ └─ zjson-panel.component.ts
+ │ │ ├─ app.base.ts
+ │ │ ├─ app.component.html
+ │ │ ├─ app.component.less
+ │ │ ├─ app.component.spec.ts
+ │ │ ├─ app.component.ts
+ │ │ ├─ app.module.ts
+ │ │ ├─ app.service.ts
+ │ │ └─ screen.service.ts
+ │ ├─ assets
+ │ │ ├─ css
+ │ │ │ └─ loading.css
+ │ │ ├─ i18n
+ │ │ │ ├─ en.json
+ │ │ │ └─ zh.json
+ │ │ ├─ img
+ │ │ │ ├─ chrome.png
+ │ │ │ ├─ firefox.png
+ │ │ │ └─ mean_stack.jpg
+ │ │ └─ lib
+ │ │   ├─ font-awesome/
+ │ │   ├─ monaco-editor
+ │ │   │ └─ vs
+ │ │   │   ├─ base/
+ │ │   │   ├─ basic-languages/
+ │ │   │   ├─ editor/
+ │ │   │   ├─ language/
+ │ │   │   └─ loader.js
+ │ │   ├─ FileSaver.js
+ │ │   ├─ animate.min.css
+ │ │   ├─ bootstrap.min.css
+ │ │   ├─ bootstrap.min.js
+ │ │   ├─ funclib.min.js
+ │ │   └─ jquery.min.js
+ │ ├─ environments
+ │ │ ├─ environment.prod.ts
+ │ │ └─ environment.ts
+ │ ├─ browserslist
+ │ ├─ favicon.ico
+ │ ├─ index.html
+ │ ├─ karma.conf.js
+ │ ├─ main.ts
+ │ ├─ polyfills.ts
+ │ ├─ styles.less
+ │ ├─ test.ts
+ │ ├─ tsconfig.app.json
+ │ ├─ tsconfig.spec.json
+ │ ├─ tslint.json
+ │ └─ typings.d.ts
+ ├─ .editorconfig
+ ├─ .gitignore
+ ├─ README.md
+ ├─ RELEASES
+ ├─ angular.json
+ ├─ mean.jpg
+ ├─ package.json
+ ├─ proxy.conf.json
+ ├─ tsconfig.json
+ ├─ tslint.json
+ ├─ zjson-diff.png
+ └─ zjson.png
+```

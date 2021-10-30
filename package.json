@@ -1,40 +1,84 @@
 {
-    "name": "ace",
-    "description": "Ajax.org Code Editor is a full featured source code highlighting editor that powers the Cloud9 IDE",
-    "version": "1.4.13",
-    "homepage": "http://github.com/ajaxorg/ace",
-    "engines": {
-        "node": ">= 0.6.0"
-    },
-    "author": "Fabian Jakobs <fabian@c9.io>",
-    "main": "lib/ace",
-    "typings": "ace.d.ts",
-    "repository": {
-        "type": "git",
-        "url": "http://github.com/ajaxorg/ace.git"
-    },
-    "devDependencies": {
-        "asyncjs": "~0.0.12",
-        "amd-loader": "~0.0.4",
-        "dryice": "0.4.11",
-        "architect-build": "https://github.com/c9/architect-build/tarball/43a6fdeffe"
-    },
-    "mappings": {
-        "ace": "."
-    },
-    "licenses": [
-        {
-            "type": "BSD New",
-            "url": "http://opensource.org/licenses/BSD-3-Clause"
-        }
-    ],
-    "directories": {
-        "lib": "lib/ace"
-    },
-    "scripts": {
-        "start": "node static.js",
-        "test": "node lib/ace/test/all.js",
-        "lint": "eslint \"lib/ace/**/*.js\"",
-        "fix": "eslint --fix 'lib/ace/**/*.js'"
-    }
+  "name": "zjson",
+  "version": "5.1.4",
+  "description": "A powerful JSON formatting and editing tools.",
+  "scripts": {
+    "ng": "ng",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "start": "node scripts/prepare.js && ng serve --proxy-config proxy.conf.json -o",
+    "build": "node scripts/prepare.js && ng build --prod && node scripts/build.js",
+    "build:dmg": "node scripts/clear.js dmg && npm run electron:build && npm run electron:dmg && node scripts/prepare.js && npm run package:dmg",
+    "build:exe": "node scripts/clear.js exe && npm run electron:build && npm run electron:exe && node scripts/prepare.js",
+    "build:win": "node scripts/clear.js exe && npm run electron:build && npm run electron:exe && node scripts/prepare.js && npm run package:exe",
+    "electron": "node scripts/prepare.js electron && ng build --prod && node scripts/electron.js && electron dist",
+    "electron:dist": "electron dist",
+    "electron:build": "node scripts/prepare.js electron && ng build --prod && node scripts/electron.js package && node scripts/webpack.config.js",
+    "electron:dmg": "electron-packager dist zjson --platform=darwin --arch=x64 --out=package --icon=electron-app/zjson.icns --overwrite",
+    "electron:exe": "electron-packager dist zjson --platform=win32 --arch=x64 --out=package --icon=electron-app/zjson.ico --overwrite",
+    "package:dmg": "node scripts/build-dmg.js && node scripts/rename.js dmg",
+    "package:exe": "node scripts/build-exe.js && node scripts/rename.js exe",
+    "preview": "serve build",
+    "clear": "node scripts/clear.js"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^6.0.0",
+    "@angular/common": "^6.0.0",
+    "@angular/compiler": "^6.0.0",
+    "@angular/core": "^6.0.0",
+    "@angular/forms": "^6.0.0",
+    "@angular/http": "^6.0.0",
+    "@angular/platform-browser": "^6.0.0",
+    "@angular/platform-browser-dynamic": "^6.0.0",
+    "@angular/router": "^6.0.0",
+    "@ngx-translate/core": "^10.0.1",
+    "@ngx-translate/http-loader": "^3.0.1",
+    "bootstrap": "^3.3.7",
+    "core-js": "^2.5.4",
+    "electron-baidu-tongji": "^1.0.5",
+    "font-awesome": "^4.7.0",
+    "funclib": "^6.0.5",
+    "jquery": "^3.3.1",
+    "monaco-editor": "^0.14.3",
+    "ngx-bootstrap": "^3.0.1",
+    "node-fetch": "^2.6.1",
+    "request": "^2.88.0",
+    "rxjs": "6.0.0",
+    "rxjs-compat": "6.1.0",
+    "unzip": "^0.1.11",
+    "zone.js": "^0.8.26"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~0.6.0",
+    "@angular/cli": "~6.0.0",
+    "@angular/compiler-cli": "^6.0.0",
+    "@angular/language-service": "^6.0.0",
+    "@types/jasmine": "~2.8.6",
+    "@types/jasminewd2": "~2.0.3",
+    "@types/node": "~8.9.4",
+    "codelyzer": "~4.2.1",
+    "electron": "^13.2.1",
+    "electron-installer-dmg": "^3.0.0",
+    "electron-installer-windows": "^3.0.0",
+    "electron-packager": "^15.3.0",
+    "glob": "^7.1.2",
+    "jasmine-core": "~2.99.1",
+    "jasmine-spec-reporter": "~4.2.1",
+    "karma": "~1.7.1",
+    "karma-chrome-launcher": "~2.2.0",
+    "karma-coverage-istanbul-reporter": "~1.4.2",
+    "karma-jasmine": "~1.1.1",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "progress": "^2.0.0",
+    "protractor": "~5.3.0",
+    "rimraf": "^2.6.2",
+    "serve": "^12.0.0",
+    "ts-node": "~5.0.1",
+    "tslint": "~5.9.1",
+    "typescript": "~2.7.2",
+    "webpack": "^4.46.0",
+    "webpack5.51.1": "npm:webpack@5.51.1"
+  }
 }
